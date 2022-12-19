@@ -36,11 +36,9 @@ namespace YouDl
 			{
 				for (int i = 0; i < queries.Length; i++)
 				{
-					string uri = queries[i];
-
 					try
 					{
-						var video = cli.GetVideo(uri);
+						var video = cli.GetVideo(queries[i]);
 						File.WriteAllBytes(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) +
 							"/" + 
 							video.FullName, video.GetBytes());
