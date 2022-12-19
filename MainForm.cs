@@ -40,9 +40,11 @@ namespace YouDl
 				{
 					try
 					{
+						this.buttonSafe.Enabled = false;
 						var video = cli.GetVideo(queries[i]);
 						videoBytes = video.GetBytes();
 						fileName = video.FullName;
+						this.buttonSafe.Enabled = true;
 					}
 					catch (Exception ex)
 					{
@@ -65,6 +67,7 @@ namespace YouDl
 
 		private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
 		{
+			buttonSafe.Enabled = false;
 			saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
 			File.WriteAllBytes(saveFileDialog.FileName, videoBytes);
 		}
