@@ -15,6 +15,8 @@ namespace YouDl
 	public partial class MainForm : Form
 	{
 		string[] queries;
+		byte[] videoBytes;
+		string fileName;
 		public MainForm()
 		{
 			InitializeComponent();
@@ -39,9 +41,8 @@ namespace YouDl
 					try
 					{
 						var video = cli.GetVideo(queries[i]);
-						File.WriteAllBytes(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) +
-							"/" + 
-							video.FullName, video.GetBytes());
+						videoBytes = video.GetBytes();
+						fileName = video.FullName;
 					}
 					catch (Exception ex)
 					{
@@ -54,6 +55,18 @@ namespace YouDl
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 
+		}
+
+		private void buttonSave_Click(object sender, EventArgs e)
+		{
+			saveFileDialog.FileName = fileName;
+			saveFileDialog.ShowDialog();
+		}
+
+		private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
+		{
+			saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+			File.WriteAllBytes(saveFileDialog.FileName, videoBytes);
 		}
 	}
 }

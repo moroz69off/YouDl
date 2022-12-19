@@ -33,6 +33,8 @@ namespace YouDl
 			this.input_textBox = new System.Windows.Forms.TextBox();
 			this.result_textBox = new System.Windows.Forms.TextBox();
 			this.button = new System.Windows.Forms.Button();
+			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+			this.button1 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// input_textBox
@@ -72,11 +74,28 @@ namespace YouDl
 			this.button.UseVisualStyleBackColor = true;
 			this.button.Click += new System.EventHandler(this.button_Click);
 			// 
+			// saveFileDialog
+			// 
+			this.saveFileDialog.Filter = "Video|*.mp4|Audio|*.mp3";
+			this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
+			// 
+			// button1
+			// 
+			this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+			this.button1.Location = new System.Drawing.Point(477, 511);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(175, 43);
+			this.button1.TabIndex = 3;
+			this.button1.Text = "Save as...";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.buttonSave_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(664, 575);
+			this.Controls.Add(this.button1);
 			this.Controls.Add(this.result_textBox);
 			this.Controls.Add(this.button);
 			this.Controls.Add(this.input_textBox);
@@ -96,6 +115,8 @@ namespace YouDl
 		private System.Windows.Forms.TextBox input_textBox;
 		private System.Windows.Forms.Button button;
 		private System.Windows.Forms.TextBox result_textBox;
+		private System.Windows.Forms.SaveFileDialog saveFileDialog;
+		private System.Windows.Forms.Button button1;
 	}
 }
 
