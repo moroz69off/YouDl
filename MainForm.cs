@@ -45,7 +45,6 @@ namespace YouDl
 						videoBytes = video.GetBytes();
 						fileName = video.FullName;
 						buttonSafe.Enabled = true;
-
 						ViewResult(video, i);
 					}
 					catch (Exception ex)
@@ -58,12 +57,11 @@ namespace YouDl
 
 		private void ViewResult(YouTubeVideo video, int i)
 		{
-			result_textBox.Text += $"found video {i+1} from the list {video.Title}\r\nTo save the video or audio, click the «save» button";
-		}
+			result_textBox.Text +=
+				$"found video {i+1} from the you list «{video.Title}»\r\n" +
+				$"To save the video or audio, click the «Save as...» button\r\n\r\n";
 
-		private void MainForm_Load(object sender, EventArgs e)
-		{
-
+			MessageBox.Show($"Safe this video(or audio)?", "Safe question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 		}
 
 		private void ButtonSave_Click(object sender, EventArgs e)
