@@ -32,7 +32,7 @@ namespace YouDl
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.input_textBox = new System.Windows.Forms.TextBox();
 			this.result_textBox = new System.Windows.Forms.TextBox();
-			this.button = new System.Windows.Forms.Button();
+			this.buttonGo = new System.Windows.Forms.Button();
 			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.buttonSafe = new System.Windows.Forms.Button();
 			this.SuspendLayout();
@@ -61,18 +61,18 @@ namespace YouDl
 			this.result_textBox.Size = new System.Drawing.Size(640, 451);
 			this.result_textBox.TabIndex = 2;
 			// 
-			// button
+			// buttonGo
 			// 
-			this.button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.button.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-			this.button.Location = new System.Drawing.Point(512, 12);
-			this.button.Name = "button";
-			this.button.Size = new System.Drawing.Size(140, 24);
-			this.button.TabIndex = 1;
-			this.button.Text = "Go!";
-			this.button.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-			this.button.UseVisualStyleBackColor = true;
-			this.button.Click += new System.EventHandler(this.ButtonGo_Click);
+			this.buttonGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonGo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+			this.buttonGo.Location = new System.Drawing.Point(512, 12);
+			this.buttonGo.Name = "buttonGo";
+			this.buttonGo.Size = new System.Drawing.Size(140, 24);
+			this.buttonGo.TabIndex = 1;
+			this.buttonGo.Text = "Go!";
+			this.buttonGo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+			this.buttonGo.UseVisualStyleBackColor = true;
+			this.buttonGo.Click += new System.EventHandler(this.ButtonGo_Click);
 			// 
 			// saveFileDialog
 			// 
@@ -81,6 +81,7 @@ namespace YouDl
 			// 
 			// buttonSafe
 			// 
+			this.buttonSafe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonSafe.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
 			this.buttonSafe.Location = new System.Drawing.Point(477, 511);
 			this.buttonSafe.Name = "buttonSafe";
@@ -97,7 +98,7 @@ namespace YouDl
 			this.ClientSize = new System.Drawing.Size(664, 575);
 			this.Controls.Add(this.buttonSafe);
 			this.Controls.Add(this.result_textBox);
-			this.Controls.Add(this.button);
+			this.Controls.Add(this.buttonGo);
 			this.Controls.Add(this.input_textBox);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(680, 614);
@@ -112,7 +113,7 @@ namespace YouDl
 		#endregion
 
 		private System.Windows.Forms.TextBox input_textBox;
-		private System.Windows.Forms.Button button;
+		private System.Windows.Forms.Button buttonGo;
 		private System.Windows.Forms.TextBox result_textBox;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog;
 		private System.Windows.Forms.Button buttonSafe;

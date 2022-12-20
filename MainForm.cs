@@ -17,6 +17,7 @@ namespace YouDl
 		string[] queries;
 		byte[] videoBytes;
 		string fileName;
+		char[] delimiter = new char[] { ',' };
 		public MainForm()
 		{
 			InitializeComponent();
@@ -24,7 +25,7 @@ namespace YouDl
 
 		private void input_textBox_TextChanged(object sender, EventArgs e)
 		{
-			queries = input_textBox.Text.Split(new char[] { ',' }).ToArray();
+			queries = input_textBox.Text.Split(delimiter).ToArray();
 		}
 
 		private void ButtonGo_Click(object sender, EventArgs e)
@@ -60,8 +61,16 @@ namespace YouDl
 			result_textBox.Text +=
 				$"found video {i+1} from the you list «{video.Title}»\r\n" +
 				$"To save the video or audio, click the «Save as...» button\r\n\r\n";
-
-			MessageBox.Show($"Safe this video(or audio)?", "Safe question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+			string message = $"Safe this video(or audio)?";
+			string caption = "Safe question";
+			MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+			MessageBoxIcon icon = MessageBoxIcon.Question;
+			DialogResult result =
+			MessageBox.Show(this, message, caption, buttons, icon);
+			if (result == DialogResult.Yes)
+			{
+				ButtonSave_Click(result, null);
+			}
 		}
 
 		private void ButtonSave_Click(object sender, EventArgs e)
