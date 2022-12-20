@@ -72,12 +72,12 @@ namespace YouDl
 			this.button.Text = "Go!";
 			this.button.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
 			this.button.UseVisualStyleBackColor = true;
-			this.button.Click += new System.EventHandler(this.button_Click);
+			this.button.Click += new System.EventHandler(this.ButtonGo_Click);
 			// 
 			// saveFileDialog
 			// 
 			this.saveFileDialog.Filter = "Video|*.mp4|Audio|*.mp3";
-			this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
+			this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.SaveFileDialog_FileOk);
 			// 
 			// buttonSafe
 			// 
@@ -88,7 +88,7 @@ namespace YouDl
 			this.buttonSafe.TabIndex = 3;
 			this.buttonSafe.Text = "Save as...";
 			this.buttonSafe.UseVisualStyleBackColor = true;
-			this.buttonSafe.Click += new System.EventHandler(this.buttonSave_Click);
+			this.buttonSafe.Click += new System.EventHandler(this.ButtonSave_Click);
 			// 
 			// MainForm
 			// 

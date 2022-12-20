@@ -27,7 +27,7 @@ namespace YouDl
 			queries = input_textBox.Text.Split(new char[] { ',' }).ToArray();
 		}
 
-		private void button_Click(object sender, EventArgs e)
+		private void ButtonGo_Click(object sender, EventArgs e)
 		{
 			VideoLib(queries);
 		}
@@ -40,11 +40,13 @@ namespace YouDl
 				{
 					try
 					{
-						this.buttonSafe.Enabled = false;
+						buttonSafe.Enabled = false;
 						var video = cli.GetVideo(queries[i]);
 						videoBytes = video.GetBytes();
 						fileName = video.FullName;
-						this.buttonSafe.Enabled = true;
+						buttonSafe.Enabled = true;
+
+						ViewResult(video, i);
 					}
 					catch (Exception ex)
 					{
@@ -54,18 +56,23 @@ namespace YouDl
 			}
 		}
 
+		private void ViewResult(YouTubeVideo video, int i)
+		{
+			result_textBox.Text += $"found video {i+1} from the list {video.Title}\r\nTo save the video or audio, click the «save» button";
+		}
+
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 
 		}
 
-		private void buttonSave_Click(object sender, EventArgs e)
+		private void ButtonSave_Click(object sender, EventArgs e)
 		{
 			saveFileDialog.FileName = fileName;
 			saveFileDialog.ShowDialog();
 		}
 
-		private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
+		private void SaveFileDialog_FileOk(object sender, CancelEventArgs e)
 		{
 			buttonSafe.Enabled = false;
 			saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
