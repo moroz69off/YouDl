@@ -59,9 +59,8 @@ namespace YouDl
 		private void ViewResult(YouTubeVideo video, int i)
 		{
 			result_textBox.Text +=
-				$"found video {i+1} from the you list «{video.Title}»\r\n" +
-				$"To save the video or audio, click the «Save as...» button\r\n\r\n";
-			string message = $"Safe this video(or audio)?";
+				$"found video {i+1} from the you list «{video.Title}»\r\n";
+			string message = $"Safe this video?";
 			string caption = "Safe question";
 			MessageBoxButtons buttons = MessageBoxButtons.YesNo;
 			MessageBoxIcon icon = MessageBoxIcon.Question;
