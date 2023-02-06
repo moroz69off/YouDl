@@ -16,8 +16,16 @@ namespace YouDl
 	{
 		string[] queries;
 		byte[] videoBytes;
+		List<byte[]> videosData = new List<byte[]>();
+		List<string> videoNames = new List<string>();
 		string fileName;
 		char[] delimiter = new char[] { ',' };
+
+		MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+		MessageBoxIcon icon = MessageBoxIcon.Question;
+		string message = "Safe this video?";
+		string caption = "Safe question";
+
 		public MainForm()
 		{
 			InitializeComponent();
@@ -43,13 +51,19 @@ namespace YouDl
 					{
 						var video = cli.GetVideo(queries[i]);
 						videoBytes = video.GetBytes();
-						fileName = video.FullName;
+						videosData.Add(videoBytes);
+						videoNames.Add(video.FullName);
 						ViewResult(video, i);
 					}
 					catch (Exception ex)
 					{
 						MessageBox.Show(ex.Message, ex.Source);
 					}
+				}
+				DialogResult result = MessageBox.Show(this, message, caption, buttons, icon);
+				if (result == DialogResult.Yes)
+				{
+					ButtonSave_Click(result, null);
 				}
 			}
 		}
@@ -58,22 +72,16 @@ namespace YouDl
 		{
 			result_textBox.Text +=
 				$"found video {i+1} from the you list «{video.Title}»\r\n";
-			string message = $"Safe this video?";
-			string caption = "Safe question";
-			MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-			MessageBoxIcon icon = MessageBoxIcon.Question;
-			DialogResult result =
-			MessageBox.Show(this, message, caption, buttons, icon);
-			if (result == DialogResult.Yes)
-			{
-				ButtonSave_Click(result, null);
-			}
 		}
 
 		private void ButtonSave_Click(object sender, EventArgs e)
 		{
-			saveFileDialog.FileName = fileName;
-			saveFileDialog.ShowDialog();
+            for (int i = 0; i < videoNames.Count; i++)
+            {
+				saveFileDialog.FileName = videoNames[i];
+				videoBytes = videosData[i];
+				saveFileDialog.ShowDialog();
+			}
 		}
 
 		private void SaveFileDialog_FileOk(object sender, CancelEventArgs e)
