@@ -41,7 +41,11 @@ namespace YouDl
 			VideoLib(queries);
 		}
 
-		private void VideoLib(string[] queries)
+        /// <summary>
+        /// Initiates a client for every video address
+        /// </summary>
+        /// <param name="queries">Several (or one) youtube video addresses separated by a comma - «,»</param>
+        private void VideoLib(string[] queries)
 		{
 			using (var cli = Client.For(YouTube.Default))
 			{
