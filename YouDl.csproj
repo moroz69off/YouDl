@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Jurassic, Version=3.2.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Jurassic.3.2.6\lib\netstandard2.0\Jurassic.dll</HintPath>
@@ -95,6 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="icon_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
