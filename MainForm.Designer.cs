@@ -100,8 +100,8 @@ namespace YouDl
 
 		private System.Windows.Forms.TextBox input_textBox;
 		private System.Windows.Forms.Button buttonGo;
-		private static System.Windows.Forms.TextBox result_textBox;
-        private static System.Windows.Forms.SaveFileDialog saveFileDialog;
+		private System.Windows.Forms.TextBox result_textBox;
+		private System.Windows.Forms.SaveFileDialog saveFileDialog;
 	}
 }
 
