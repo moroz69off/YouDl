@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VideoLibrary;
@@ -14,19 +15,51 @@ namespace YouDl
 {
 	public partial class MainForm : Form
 	{
-		string[] queries;
-		byte[] videoBytes;
-		List<byte[]> videosData = new List<byte[]>();
-		List<string> videoNames = new List<string>();
+
+
+
+		static string[] queries;
+		static byte[] videoBytes;
+		static List<byte[]> videosData = new List<byte[]>();
+		static List<string> videoNames = new List<string>();
 		string fileName;
 		char[] delimiter = new char[] { ',' };
 
-		MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-		MessageBoxIcon icon = MessageBoxIcon.Question;
-		string message = "Safe this video?";
-		string caption = "Safe question";
+		static MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+		static MessageBoxIcon icon = MessageBoxIcon.Question;
+		static string message = "Safe this video?";
+		static string caption = "Safe question";
+		static private readonly int i;
 
-		public MainForm()
+		Thread TD;
+        private static ThreadStart Mstart(string q)
+        {
+            using (var cli = Client.For(YouTube.Default))
+            {
+                try
+                {
+                    var video = cli.GetVideo(q);
+                    videoBytes = video.GetBytes();
+                    videosData.Add(videoBytes);
+                    videoNames.Add(video.FullName);
+                    ViewResult(video, i);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, ex.Source);
+                }
+
+                DialogResult result = MessageBox.Show(owner: null, message, caption, buttons, icon);
+                if (result == DialogResult.Yes)
+                {
+                    ButtonSave_Click(result, null);
+                }
+
+            }
+            return null;
+        }
+
+        public MainForm()
 		{
 			InitializeComponent();
 		}
@@ -47,38 +80,19 @@ namespace YouDl
         /// <param name="queries">Several (or one) youtube video addresses separated by a comma - «,»</param>
         private void VideoLib(string[] queries)
 		{
-			using (var cli = Client.For(YouTube.Default))
-			{
-				for (int i = 0; i < queries.Length; i++)
-				{
-					try
-					{
-						var video = cli.GetVideo(queries[i]);
-						videoBytes = video.GetBytes();
-						videosData.Add(videoBytes);
-						videoNames.Add(video.FullName);
-						ViewResult(video, i);
-					}
-					catch (Exception ex)
-					{
-						MessageBox.Show(ex.Message, ex.Source);
-					}
-				}
-				DialogResult result = MessageBox.Show(this, message, caption, buttons, icon);
-				if (result == DialogResult.Yes)
-				{
-					ButtonSave_Click(result, null);
-				}
-			}
+            for (int i = 0; i < queries.Length; i++)
+            {
+				TD = new Thread(Mstart(queries[i]));
+            }
 		}
 
-		private void ViewResult(YouTubeVideo video, int i)
+		private static void ViewResult(YouTubeVideo video, int i)
 		{
-			result_textBox.Text +=
+            result_textBox.Text +=
 				$"found video {i+1} from the you list «{video.Title}»\r\n";
 		}
 
-		private void ButtonSave_Click(object sender, EventArgs e)
+		private static void ButtonSave_Click(object sender, EventArgs e)
 		{
             for (int i = 0; i < videoNames.Count; i++)
             {
