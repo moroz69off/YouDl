@@ -15,6 +15,7 @@
 
 # mrz
 libvideo-master/
+threading/
 
 # Mono auto generated files
 mono_crash.*
