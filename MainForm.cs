@@ -6,7 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+// using System.Threading.Tasks;
 using System.Windows.Forms;
 using VideoLibrary;
 
@@ -18,7 +18,7 @@ namespace YouDl
 		byte[] videoBytes;
 		List<byte[]> videosData = new List<byte[]>();
 		List<string> videoNames = new List<string>();
-		string fileName;
+		// string fileName;
 		char[] delimiter = new char[] { ',' };
 
 		MessageBoxButtons buttons = MessageBoxButtons.YesNo;
