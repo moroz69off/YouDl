@@ -40,11 +40,11 @@ namespace YouDl
 
 		private void ButtonGo_Click(object sender, EventArgs e)
 		{
-			// VideoLib(queries);
-			task = Task.Run(() => {
+			VideoLib(queries);
+			//task = Task.Run(() => {
 
-			});
-			task.Wait();
+			//});
+			//task.Wait();
 		}
 
 
