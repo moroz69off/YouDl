@@ -14,6 +14,7 @@ namespace YouDl
 {
 	public partial class MainForm : Form
 	{
+		Task task;
 		string[] queries;
 		byte[] videoBytes;
 		List<byte[]> videosData = new List<byte[]>();
@@ -29,6 +30,7 @@ namespace YouDl
 		public MainForm()
 		{
 			InitializeComponent();
+
 		}
 
 		private void input_textBox_TextChanged(object sender, EventArgs e)
@@ -38,8 +40,13 @@ namespace YouDl
 
 		private void ButtonGo_Click(object sender, EventArgs e)
 		{
-			VideoLib(queries);
+			// VideoLib(queries);
+			task = Task.Run(() => {
+
+			});
+			task.Wait();
 		}
+
 
         /// <summary>
         /// Initiates a client for every video address
