@@ -72,13 +72,13 @@ namespace YouDl
 
 		private void ButtonGo_Click(object sender, EventArgs e)
 		{
-			VideoLib(queries);
+			// VideoLib(queries);
             //task = Task.Run(() => {
             //	MessageBox.Show("task run");
             //});
             //task.Wait();
             Task result = MTask(queries);
-			result.Start();
+			result.Wait(20000);
 		}
 
 
