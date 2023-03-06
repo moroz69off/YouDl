@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,38 +31,6 @@ namespace YouDl
 		public MainForm()
 		{
 			InitializeComponent();
-//======================================================
-
-        static async Task Main(string[] args)
-		{
-            var youtube = YouTube.Default;
-            var video = youtube.GetVideo("https://www.youtube.com/watch?v=GNxEEyOMce4");
-            var client = new HttpClient();
-            long? totalByte = 0;
-            using (Stream output = File.OpenWrite("C:\\Users" + video.Title))
-            {
-                using (var request = new HttpRequestMessage(HttpMethod.Head, video.Uri))
-                {
-                    totalByte = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).Result.Content.Headers.ContentLength;
-                }
-                using (var input = await client.GetStreamAsync(video.Uri))
-                {
-                    byte[] buffer = new byte[16 * 1024];
-                    int read;
-                    int totalRead = 0;
-                    Console.WriteLine("Download Started");
-                    while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
-                    {
-                        output.Write(buffer, 0, read);
-                        totalRead += read;
-                        Console.Write($"\rDownloading {totalRead}/{totalByte} ...");
-                    }
-                    Console.WriteLine("Download Complete");
-                }
-            }
-        }
-
-//======================================================
 		}
 
 		private void input_textBox_TextChanged(object sender, EventArgs e)
@@ -69,13 +38,50 @@ namespace YouDl
 			queries = input_textBox.Text.Split(delimiter).ToArray();
 		}
 
+
+		//======================================================
+
+		async Task MTask(string[] args)
+		{
+			var youtube = YouTube.Default;
+			var video = youtube.GetVideo(queries[0]);
+			var client = new HttpClient();
+			long? totalByte = 0;
+			using (Stream output = File.OpenWrite(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + video.Title))
+			{
+				using (var request = new HttpRequestMessage(HttpMethod.Head, video.Uri))
+				{
+					totalByte = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).Result.Content.Headers.ContentLength;
+				}
+				using (var input = await client.GetStreamAsync(video.Uri))
+				{
+					byte[] buffer = new byte[16 * 1024];
+					int read;
+					int totalRead = 0;
+					Console.WriteLine("Download Started");
+					while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+					{
+						output.Write(buffer, 0, read);
+						totalRead += read;
+						Console.Write($"\rDownloading {totalRead}/{totalByte} ...");
+					}
+					Console.WriteLine("Download Complete");
+				}
+			}
+		}
+
+		//======================================================
+
+
 		private void ButtonGo_Click(object sender, EventArgs e)
 		{
 			VideoLib(queries);
-			task = Task.Run(() => {
-				MessageBox.Show("task run");
-			});
-			task.Wait();
+            //task = Task.Run(() => {
+            //	MessageBox.Show("task run");
+            //});
+            //task.Wait();
+            Task result = MTask(queries);
+			result.Start();
 		}
 
 
