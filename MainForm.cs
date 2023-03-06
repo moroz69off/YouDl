@@ -41,10 +41,10 @@ namespace YouDl
 		private void ButtonGo_Click(object sender, EventArgs e)
 		{
 			VideoLib(queries);
-			//task = Task.Run(() => {
-
-			//});
-			//task.Wait();
+			task = Task.Run(() => {
+				MessageBox.Show("task run");
+			});
+			task.Wait();
 		}
 
 
