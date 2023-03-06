@@ -15,7 +15,6 @@ namespace YouDl
 {
 	public partial class MainForm : Form
 	{
-		Task task;
 		string[] queries;
 		byte[] videoBytes;
 		List<byte[]> videosData = new List<byte[]>();
@@ -40,7 +39,6 @@ namespace YouDl
 
 
 		//======================================================
-
 		async Task MTask(string[] args)
 		{
 			var youtube = YouTube.Default;
@@ -69,7 +67,6 @@ namespace YouDl
 				}
 			}
 		}
-
 		//======================================================
 
 
