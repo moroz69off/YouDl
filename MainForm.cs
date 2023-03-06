@@ -30,7 +30,38 @@ namespace YouDl
 		public MainForm()
 		{
 			InitializeComponent();
+//======================================================
 
+        static async Task Main(string[] args)
+		{
+            var youtube = YouTube.Default;
+            var video = youtube.GetVideo("https://www.youtube.com/watch?v=GNxEEyOMce4");
+            var client = new HttpClient();
+            long? totalByte = 0;
+            using (Stream output = File.OpenWrite("C:\\Users" + video.Title))
+            {
+                using (var request = new HttpRequestMessage(HttpMethod.Head, video.Uri))
+                {
+                    totalByte = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).Result.Content.Headers.ContentLength;
+                }
+                using (var input = await client.GetStreamAsync(video.Uri))
+                {
+                    byte[] buffer = new byte[16 * 1024];
+                    int read;
+                    int totalRead = 0;
+                    Console.WriteLine("Download Started");
+                    while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        output.Write(buffer, 0, read);
+                        totalRead += read;
+                        Console.Write($"\rDownloading {totalRead}/{totalByte} ...");
+                    }
+                    Console.WriteLine("Download Complete");
+                }
+            }
+        }
+
+//======================================================
 		}
 
 		private void input_textBox_TextChanged(object sender, EventArgs e)
