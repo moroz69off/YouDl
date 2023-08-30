@@ -76,7 +76,6 @@ namespace YouDl
             // saveFileDialog
             // 
             this.saveFileDialog.Filter = "Video|*.mp4|Audio|*.mp3";
-            this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.SaveFileDialog_FileOk);
             // 
             // MainForm
             // 
