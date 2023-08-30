@@ -59,10 +59,6 @@ namespace YouDl
 		{
             Task result = MTask(queries);
 			result.Wait(6000);
-            if (result.IsCompleted)
-            {
-				MessageBox.Show("Task completed!");
-            }
 		}
     }
 }
