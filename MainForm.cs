@@ -33,6 +33,7 @@ namespace YouDl
 		{
 			var youtube = YouTube.Default;
 			var video = youtube.GetVideo(queries[0]);
+			//var videos = youtube.GetAllVideos(queries[0]);
 			var client = new HttpClient();
 			long? totalByte = 0;
 			using (Stream output = File.OpenWrite(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "//" + video.Title + ".mp4"))
@@ -59,6 +60,15 @@ namespace YouDl
 		{
             Task result = MTask(queries);
 			result.Wait(1000);
+
+			//=========================
+
+
+			MessageBox.Show("MTask Ok");
+			MessageBox.Show("MFile Ok");
+
+
+			//==========================
 		}
     }
 }
