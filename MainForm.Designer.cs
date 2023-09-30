@@ -83,9 +83,9 @@ namespace YouDl
             // 
             this.backgroundWorker.WorkerReportsProgress = true;
             this.backgroundWorker.WorkerSupportsCancellation = true;
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            //this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
             // resultLabel
             // 
@@ -121,8 +121,8 @@ namespace YouDl
 		private System.Windows.Forms.Button buttonGo;
 		private System.Windows.Forms.TextBox result_textBox;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.Label resultLabel;
+        public System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }
 
