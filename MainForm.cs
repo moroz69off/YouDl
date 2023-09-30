@@ -59,16 +59,7 @@ namespace YouDl
 		private void ButtonGo_Click(object sender, EventArgs e)
 		{
             Task result = MTask(queries);
-			result.Wait(1000);
-
-			//=========================
-
-
-			MessageBox.Show("MTask Ok");
-			MessageBox.Show("MFile Ok");
-
-
-			//==========================
+            result.Wait(1000);
 		}
     }
 }
