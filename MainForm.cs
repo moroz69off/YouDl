@@ -29,7 +29,7 @@ namespace YouDl
 			queries = input_textBox.Text.Split(delimiter).ToArray();
 		}
 
-		async Task MTask(string[] args)
+        async Task MTask(string[] args)
 		{
 			var youtube = YouTube.Default;
 			var video = youtube.GetVideo(queries[0]);
@@ -58,8 +58,45 @@ namespace YouDl
 
 		private void ButtonGo_Click(object sender, EventArgs e)
 		{
+			backgroundWorker.RunWorkerAsync();
+
             Task result = MTask(queries);
-            result.Wait(1000);
+            result.Wait(500);
 		}
+
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                if (backgroundWorker.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+                else
+                {
+                    System.Threading.Thread.Sleep(1000);
+                    backgroundWorker.ReportProgress(i * 10);
+                }
+            }
+        }
+
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            resultLabel.Text = (e.ProgressPercentage.ToString() + "%");
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+            if (e.Error != null)
+            {
+                resultLabel.Text = "Error: " + e.Error.Message;
+            }
+            else
+            {
+                resultLabel.Text = "Done!";
+            }
+        }
     }
 }

@@ -34,6 +34,8 @@ namespace YouDl
             this.result_textBox = new System.Windows.Forms.TextBox();
             this.buttonGo = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.resultLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // input_textBox
@@ -77,11 +79,29 @@ namespace YouDl
             // 
             this.saveFileDialog.Filter = "Video|*.mp4|Audio|*.mp3";
             // 
+            // backgroundWorker
+            // 
+            this.backgroundWorker.WorkerReportsProgress = true;
+            this.backgroundWorker.WorkerSupportsCancellation = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
+            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
+            // 
+            // resultLabel
+            // 
+            this.resultLabel.AutoSize = true;
+            this.resultLabel.Location = new System.Drawing.Point(316, 535);
+            this.resultLabel.Name = "resultLabel";
+            this.resultLabel.Size = new System.Drawing.Size(15, 13);
+            this.resultLabel.TabIndex = 3;
+            this.resultLabel.Text = "%";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(664, 575);
+            this.Controls.Add(this.resultLabel);
             this.Controls.Add(this.result_textBox);
             this.Controls.Add(this.buttonGo);
             this.Controls.Add(this.input_textBox);
@@ -101,6 +121,8 @@ namespace YouDl
 		private System.Windows.Forms.Button buttonGo;
 		private System.Windows.Forms.TextBox result_textBox;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog;
-	}
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private System.Windows.Forms.Label resultLabel;
+    }
 }
 
