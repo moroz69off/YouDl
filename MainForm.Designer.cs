@@ -34,7 +34,6 @@ namespace YouDl
             this.result_textBox = new System.Windows.Forms.TextBox();
             this.buttonGo = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.resultLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -79,14 +78,6 @@ namespace YouDl
             // 
             this.saveFileDialog.Filter = "Video|*.mp4|Audio|*.mp3";
             // 
-            // backgroundWorker
-            // 
-            this.backgroundWorker.WorkerReportsProgress = true;
-            this.backgroundWorker.WorkerSupportsCancellation = true;
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
-            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
-            //this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
-            // 
             // resultLabel
             // 
             this.resultLabel.AutoSize = true;
@@ -122,7 +113,6 @@ namespace YouDl
 		private System.Windows.Forms.TextBox result_textBox;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.Label resultLabel;
-        public System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }
 

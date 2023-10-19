@@ -34,7 +34,7 @@ namespace YouDl
         {
             var youtube = YouTube.Default;
             var video = youtube.GetVideo(queries[0]);
-            //var videos = youtube.GetAllVideos(queries[0]);
+            var videos = youtube.GetAllVideos(queries[0]);
             var client = new HttpClient();
             long? totalByte = 0;
             using (Stream output = File.OpenWrite(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "//" + video.Title + ".mp4"))
@@ -59,50 +59,8 @@ namespace YouDl
 
         private void ButtonGo_Click(object sender, EventArgs e)
         {
-            backgroundWorker.RunWorkerAsync( MTask(queries));
-            //backgroundWorker.RunWorkerAsync();
-            //Task result = MTask(queries);
-            //result.Wait(500);
-        }
-
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            for (int i = 1; i <= 10; i++)
-            {
-                if (backgroundWorker.CancellationPending == true)
-                {
-                    e.Cancel = true;
-                    break;
-                }
-                else
-                {
-                    var isbg = System.Threading.Thread.CurrentThread.IsBackground;
-                    // получаем текущий поток
-                    Thread currentThread = Thread.CurrentThread;
-                    resultLabel.Text += currentThread.Name;
-                    //System.Threading.Thread.Sleep(1000);
-                    backgroundWorker.ReportProgress(i * 10);
-                    resultLabel.Text +="\rIs-Busy: "+ backgroundWorker.IsBusy.ToString();
-                }
-            }
-        }
-
-        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            resultLabel.Text = (e.ProgressPercentage.ToString() + "%");
-        }
-
-        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-
-            if (e.Error != null)
-            {
-                resultLabel.Text = "Error: " + e.Error.Message + e.Error.StackTrace;
-            }
-            else
-            {
-                resultLabel.Text = "Done!";
-            }
+            Task result = MTask(queries);
+            result.Wait(100);
         }
     }
 }
