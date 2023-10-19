@@ -32,12 +32,14 @@ namespace YouDl
 
         async Task MTask(string[] args)
         {
-            var youtube = YouTube.Default;
-            var video = youtube.GetVideo(queries[0]);
-            var videos = youtube.GetAllVideos(queries[0]);
+            YouTube youtube = YouTube.Default;
+            YouTubeVideo video = youtube.GetVideo(queries[0]);
+            string title = video.Title;
+            title = title.Replace('/', '_').Replace('"', '_');
+            IEnumerable<YouTubeVideo> videos = youtube.GetAllVideos(queries[0]);
             var client = new HttpClient();
             long? totalByte = 0;
-            using (Stream output = File.OpenWrite(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "//" + video.Title + ".mp4"))
+            using (Stream output = File.OpenWrite(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "//" + title + ".mp4"))
             {
                 using (var request = new HttpRequestMessage(HttpMethod.Head, video.Uri))
                 {
