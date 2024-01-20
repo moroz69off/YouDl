@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,7 +40,7 @@ namespace YouDl
 
 			for(int i = 0; i < queries.Length; i++){
 				YouTubeVideo video = youtube.GetVideo(queries[i]);
-                string title = video.Title.Replace('/', '_').Replace('"', '_');
+                string title = video.Title.Replace('/', '_').Replace('"', '_').Replace('*', '_');
                 var client = new HttpClient();
 				long? totalByte = 0;
 				using (Stream output = File.OpenWrite(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "//" + title + ".mp4"))
