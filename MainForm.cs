@@ -18,7 +18,9 @@ namespace YouDl
     {
         string[] queries;
         //byte[] videoBytes;
-        char[] delimiter = new char[] { ',', '/', '"', '*', '•', '¹', '©', '—', '`', '~' };
+        //char[] delimiter = new char[] { ',', '/', '"', '*', '•', '¹', '©', '—', '`', '~' };
+        char[] badChars = new char[] { ',', '/', '"', '*', '•', '¹', '©', '—', '`', '~' };
+        char[] delimiter = new char[] { ',' };
         string title;
 
         public MainForm()
@@ -35,9 +37,7 @@ namespace YouDl
         {
             YouTube youtube = YouTube.Default;
             //YouTubeVideo video = youtube.GetVideo(queries[0]);
-            //string title = video.Title.Replace('/', '_').Replace('"', '_');
-            
-            IEnumerable<YouTubeVideo> videos = youtube.GetAllVideos(queries[0]);
+            //IEnumerable<YouTubeVideo> videos = youtube.GetAllVideos(queries[0]);
 
 			for(int i = 0; i < queries.Length; i++)
             {
@@ -68,9 +68,9 @@ namespace YouDl
 
         private void BadTitleRepair(YouTubeVideo video)
         {
-            for (int j = 0; j < delimiter.Length; j++)
+            for (int j = 0; j < badChars.Length; j++)
             {
-                title = video.Title.Replace(delimiter[j], '_');
+                title = video.Title.Replace(badChars[j], '_');
             }
         }
 
