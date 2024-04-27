@@ -46,7 +46,7 @@ namespace YouDl
             this.input_textBox.Name = "input_textBox";
             this.input_textBox.Size = new System.Drawing.Size(494, 24);
             this.input_textBox.TabIndex = 0;
-            this.input_textBox.TextChanged += new System.EventHandler(this.input_textBox_TextChanged);
+            this.input_textBox.TextChanged += new System.EventHandler(this.Input_textBox_TextChanged);
             // 
             // result_textBox
             // 
