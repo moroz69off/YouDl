@@ -36,18 +36,18 @@ namespace YouDl
             //YouTubeVideo video = youtube.GetVideo(queries[0]);
             //string title = video.Title.Replace('/', '_').Replace('"', '_');
             
-            // IEnumerable<YouTubeVideo> videos = youtube.GetAllVideos(queries[0]);
+            IEnumerable<YouTubeVideo> videos = youtube.GetAllVideos(queries[0]);
 
 			for(int i = 0; i < queries.Length; i++){
 				YouTubeVideo video = youtube.GetVideo(queries[i]);
                 string title = video.Title.Replace('/', '_').Replace('"', '_').Replace('*', '_');
                 var client = new HttpClient();
-				long? _totalByte;
+				long? totalByte = 0;
 				using (Stream output = File.OpenWrite(Environment.GetFolderPath(Environment.SpecialFolder.MyVideos) + "//" + title + ".mp4"))
 				{
 					using (var request = new HttpRequestMessage(HttpMethod.Head, video.Uri))
 					{
-						_totalByte = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).Result.Content.Headers.ContentLength;
+						totalByte = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).Result.Content.Headers.ContentLength;
 					}
 					using (var input = await client.GetStreamAsync(video.Uri))
 					{
