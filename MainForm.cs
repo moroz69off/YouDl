@@ -69,7 +69,7 @@ namespace YouDl
         private void ButtonGo_Click(object sender, EventArgs e)
         {
             Task result = MTask(queries);
-            result.Wait();
+            result.Wait(999);
 
         }
     }
