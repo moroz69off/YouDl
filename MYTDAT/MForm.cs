@@ -21,7 +21,7 @@ namespace MYTDAT
 
         async Task MVideo(string querie)
         {
-            await Task.Run(GetVid(""));
+            await Task.Run(GetVid(querie));
         }
 
         private Action GetVid(string vidUri)
