@@ -15,6 +15,7 @@ namespace MYTDAT
     public partial class MForm : Form
     {
         string title;
+        private string VidUrl ="***";
 
         public static void SaveYouVid(string vidUri)
         {
@@ -47,7 +48,8 @@ namespace MYTDAT
         private void buttonStart_Click(object sender, EventArgs e)
         {
             Task result = MVideo(title);
-            result.Wait(1);
+            result.Wait(1999);
+            SaveYouVid(VidUrl);
         }
 
         private ThreadStart MThreadStart()
@@ -57,7 +59,6 @@ namespace MYTDAT
 
         private void ts()
         {
-            title = "bu-bu-bu";
             MessageBox.Show("la-la-la");
         }
     }
