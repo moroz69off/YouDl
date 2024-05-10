@@ -16,11 +16,17 @@ namespace MYTDAT
         public MForm()
         {
             InitializeComponent();
+            
         }
 
         async Task MVideo(string querie)
         {
+            await Task.Run(GetVid(""));
+        }
 
+        private Action GetVid(string vidUri)
+        {
+            return null;
         }
     }
 }
