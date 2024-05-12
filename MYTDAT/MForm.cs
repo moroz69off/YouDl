@@ -14,17 +14,20 @@ namespace MYTDAT
 {
     public partial class MForm : Form
     {
-        string title;
-        private string VidUrl ="***";
+        private string title;
+        private string[] VidUrls;
 
         public static void SaveYouVid(string vidUri)
         {
-            string saveFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+            MessageBox.Show(vidUri);
         }
 
         public MForm()
         {
             InitializeComponent();
+            string saveFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+            title = "MRZ";
+
         }
 
         async Task MVideo(string querie)
@@ -32,34 +35,44 @@ namespace MYTDAT
             await Task.Run(GetVid(querie));
         }
 
-        private Action GetVid(string vidUri)
+        private Action GetVid(string querie)
         {
-            title = vidUri;
-            Thread myThread1 = new Thread(MThreadStart());
-            myThread1.Start();
+            title = querie ?? throw new ArgumentNullException(nameof(querie));
+            //Thread myThread1 = new Thread(MThreadStart());
+            //myThread1.Start();
             return new Action(MAction);
         }
 
         private void MAction()
         {
-            MessageBox.Show(title); // rabotaet eto
+            for (int i = 0; i < VidUrls.Length; i++)
+            {
+                MessageBox.Show(VidUrls[i]);
+            }
+            //MessageBox.Show(title); // rabotaet eto
         }
 
-        private void buttonStart_Click(object sender, EventArgs e)
+        private void ButtonStart_Click(object sender, EventArgs e)
         {
             Task result = MVideo(title);
             result.Wait(1999);
-            SaveYouVid(VidUrl);
+            //SaveYouVid(VidUrl);
         }
 
-        private ThreadStart MThreadStart()
+        private void TextBox_TextChanged(object sender, EventArgs e)
         {
-            return new ThreadStart(ts);
+            string Q = textBox.Text;
+            VidUrls = Q.Split(new char[]{ ','});
         }
 
-        private void ts()
-        {
-            MessageBox.Show("la-la-la");
-        }
+        //private ThreadStart MThreadStart()
+        //{
+        //    return new ThreadStart(ts);
+        //}
+
+        //private void ts()
+        //{
+        //    MessageBox.Show("la-la-la");
+        //}
     }
 }
