@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,16 +18,12 @@ namespace MYTDAT
     {
         private string title;
         private string[] VidUrls;
-
-        public static void SaveYouVid(string vidUri)
-        {
-            MessageBox.Show(vidUri);
-        }
+        private string saveFolderPath;
 
         public MForm()
         {
             InitializeComponent();
-            string saveFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
+            saveFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
             title = "MRZ";
 
         }
@@ -38,25 +36,46 @@ namespace MYTDAT
         private Action GetVid(string querie)
         {
             title = querie ?? throw new ArgumentNullException(nameof(querie));
-            //Thread myThread1 = new Thread(MThreadStart());
-            //myThread1.Start();
             return new Action(MAction);
         }
 
-        private void MAction()
+        private async void MAction()
         {
             for (int i = 0; i < VidUrls.Length; i++)
             {
-                MessageBox.Show(VidUrls[i]);
+                YouTube youtube = YouTube.Default;
+                YouTubeVideo video = youtube.GetVideo(VidUrls[i]);
+                title = video.Title.Replace('/', '_').Replace('"', '_').Replace('*', '_').Replace('#', '_');
+                var client = new HttpClient();
+                long? totalByte;
+                using (Stream output = File.OpenWrite(saveFolderPath + "//" + title + ".mp4"))
+                {
+                    using (var request = new HttpRequestMessage(HttpMethod.Head, video.Uri))
+                    {
+                        totalByte = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).Result.Content.Headers.ContentLength;
+                    }
+                    using (var input = await client.GetStreamAsync(video.Uri))
+                    {
+                        byte[] buffer = new byte[16 * 1024];
+                        int read;
+                        int totalRead = 0;
+                        while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            output.Write(buffer, 0, read);
+                            totalRead += read;
+                        }
+                    }
+                }
+                MessageBox.Show(title);
             }
-            //MessageBox.Show(title); // rabotaet eto
         }
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
+            button.Enabled = false;
             Task result = MVideo(title);
             result.Wait(1999);
-            //SaveYouVid(VidUrl);
+            button.Enabled = true;
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)
@@ -64,15 +83,5 @@ namespace MYTDAT
             string Q = textBox.Text;
             VidUrls = Q.Split(new char[]{ ','});
         }
-
-        //private ThreadStart MThreadStart()
-        //{
-        //    return new ThreadStart(ts);
-        //}
-
-        //private void ts()
-        //{
-        //    MessageBox.Show("la-la-la");
-        //}
     }
 }

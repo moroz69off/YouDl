@@ -29,19 +29,19 @@ namespace MYTDAT
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.button = new System.Windows.Forms.Button();
             this.textBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(560, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.ButtonStart_Click);
+            this.button.Location = new System.Drawing.Point(560, 12);
+            this.button.Name = "button1";
+            this.button.Size = new System.Drawing.Size(75, 23);
+            this.button.TabIndex = 0;
+            this.button.Text = "button1";
+            this.button.UseVisualStyleBackColor = true;
+            this.button.Click += new System.EventHandler(this.ButtonStart_Click);
             // 
             // textBox
             // 
@@ -57,7 +57,7 @@ namespace MYTDAT
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(647, 242);
             this.Controls.Add(this.textBox);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button);
             this.Name = "MForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -67,7 +67,7 @@ namespace MYTDAT
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button;
         private System.Windows.Forms.TextBox textBox;
     }
 }
