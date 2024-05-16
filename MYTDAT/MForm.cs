@@ -27,14 +27,13 @@ namespace MYTDAT
 
         }
 
-        async Task MVideo(string querie)
+        async Task MVideo()
         {
-            await Task.Run(GetVid(querie));
+            await Task.Run(GetVid());
         }
 
-        private Action GetVid(string querie)
+        private Action GetVid()
         {
-            title = querie ?? throw new ArgumentNullException(nameof(querie));
             return new Action(MAction);
         }
 
@@ -65,14 +64,14 @@ namespace MYTDAT
                         }
                     }
                 }
-                MessageBox.Show(title);
+                MessageBox.Show("Видео " + title + " загружено");
             }
         }
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
             button.Enabled = false;
-            Task result = MVideo(title);
+            Task result = MVideo();
             result.Wait(1999);
             button.Enabled = true;
         }
