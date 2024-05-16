@@ -18,12 +18,11 @@ namespace MYTDAT
     {
         private string title;
         private string[] VidUrls;
-        private string saveFolderPath;
+        private readonly string saveFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
 
         public MForm()
         {
             InitializeComponent();
-            saveFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
             title = "MRZ";
 
         }
