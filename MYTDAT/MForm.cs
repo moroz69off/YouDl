@@ -20,11 +20,10 @@ namespace MYTDAT
         private string[] VidUrls;
         private readonly string saveFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
 
+
         public MForm()
         {
             InitializeComponent();
-            title = "MRZ";
-
         }
 
         async Task MVideo()
@@ -64,7 +63,9 @@ namespace MYTDAT
                         }
                     }
                 }
-                MessageBox.Show("Видео " + title + " загружено");
+
+                //MessageBox.Show("Видео " + title + " загружено");
+                MessageBox.Show("Видео " + title + " загружено", "Загрузка видео", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             }
         }
 
@@ -72,7 +73,7 @@ namespace MYTDAT
         {
             button.Enabled = false;
             Task result = MVideo();
-            result.Wait(1999);
+            result.Wait(100);
             button.Enabled = true;
         }
 
