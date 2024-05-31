@@ -19,7 +19,7 @@ namespace MYTDAT
         private string title;
         private string[] VidUrls;
         private readonly string saveFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
-
+        public static DialogResult ResultDialog;
 
         public MForm()
         {
@@ -65,7 +65,12 @@ namespace MYTDAT
                 }
 
                 //MessageBox.Show("Видео " + title + " загружено");
-                MessageBox.Show("Видео " + title + " загружено", "Загрузка видео", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //MessageBox.Show("Видео " + title + " загружено\nСохранить звуковую дорожку отдельно?", "Загрузка видео", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                ResultDialog = MessageBox.Show("", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (ResultDialog == DialogResult.Yes)
+                {
+                    button.BackColor = Color.Azure; // temporary
+                }
             }
         }
 

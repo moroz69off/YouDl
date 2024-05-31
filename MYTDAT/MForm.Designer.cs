@@ -33,13 +33,13 @@ namespace MYTDAT
             this.textBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // button1
+            // button
             // 
             this.button.Location = new System.Drawing.Point(560, 12);
-            this.button.Name = "button1";
+            this.button.Name = "button";
             this.button.Size = new System.Drawing.Size(75, 23);
             this.button.TabIndex = 0;
-            this.button.Text = "button1";
+            this.button.Text = "Start";
             this.button.UseVisualStyleBackColor = true;
             this.button.Click += new System.EventHandler(this.ButtonStart_Click);
             // 
