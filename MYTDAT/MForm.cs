@@ -68,10 +68,10 @@ namespace MYTDAT
                 //MessageBox.Show("Видео " + title + " загружено\nСохранить звуковую дорожку отдельно?", "Загрузка видео", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 // ResultDialog = MessageBox.Show("Видео " + title + " загружено\nСохранить звуковую дорожку отдельно?", "Загрузка видео", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 ResultDialog = MessageBox.Show("Видео " + title + " загружено\nСохранить звуковую дорожку отдельно?", "Загрузка видео", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //if (ResultDialog == DialogResult.Yes)
-                //{
-                //    button.BackColor = Color.Azure; // temporary
-                //}
+                if (ResultDialog == DialogResult.Yes)
+                {
+                    button.BackColor = Color.Azure; // temporary
+                }
             }
         }
 
