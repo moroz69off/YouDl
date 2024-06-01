@@ -61,16 +61,18 @@ namespace MYTDAT
                             output.Write(buffer, 0, read);
                             totalRead += read;
                         }
+                        _ = MessageBox.Show("Видео " + title + " загружено");
                     }
                 }
 
                 //MessageBox.Show("Видео " + title + " загружено");
                 //MessageBox.Show("Видео " + title + " загружено\nСохранить звуковую дорожку отдельно?", "Загрузка видео", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                ResultDialog = MessageBox.Show("", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (ResultDialog == DialogResult.Yes)
-                {
-                    button.BackColor = Color.Azure; // temporary
-                }
+               // ResultDialog = MessageBox.Show("Видео " + title + " загружено\nСохранить звуковую дорожку отдельно?", "Загрузка видео", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                MessageBox.Show("Видео " + title + " загружено\nСохранить звуковую дорожку отдельно?", "Загрузка видео", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //if (ResultDialog == DialogResult.Yes)
+                //{
+                //    button.BackColor = Color.Azure; // temporary
+                //}
             }
         }
 
