@@ -63,24 +63,19 @@ namespace MYTDAT
                         }
                     }
                 }
-
                 //MessageBox.Show("Видео " + title + " загружено");
-                //MessageBox.Show("Видео " + title + " загружено\nСохранить звуковую дорожку отдельно?", "Загрузка видео", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                // ResultDialog = MessageBox.Show("Видео " + title + " загружено\nСохранить звуковую дорожку отдельно?", "Загрузка видео", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                ResultDialog = MessageBox.Show("Видео " + title + " загружено\nСохранить звуковую дорожку отдельно?", "Загрузка видео", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (ResultDialog == DialogResult.Yes)
-                {
-                    button.BackColor = Color.Azure; // temporary
-                }
+                //ResultDialog = MessageBox.Show("Видео " + title + " загружено\nСохранить звуковую дорожку отдельно?", "Загрузка видео", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //if (ResultDialog == DialogResult.Yes)
+                //{
+                //    button.BackColor = Color.Azure; // temporary
+                //}
             }
         }
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
-            button.Enabled = false;
             Task result = MVideo();
             result.Wait(100);
-            button.Enabled = true;
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)
