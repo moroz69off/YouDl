@@ -77,10 +77,8 @@ namespace MYTDAT
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
-            button.Enabled = false;
             Task result = MVideo();
             result.Wait(100);
-            button.Enabled = true;
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)
