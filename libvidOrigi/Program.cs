@@ -63,7 +63,7 @@ namespace libvidOrigi
             var home = Environment.GetFolderPath(
                 Environment.SpecialFolder.UserProfile);
 
-            return Path.Combine(home, "Videos");
+            return Path.Combine(home, "Dounloads");
         }
 
     }
